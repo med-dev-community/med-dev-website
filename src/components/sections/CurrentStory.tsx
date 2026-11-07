@@ -1,8 +1,8 @@
 import { ArrowRight, CircleDot, Network, Target } from "lucide-react";
 import { ButtonLink } from "../common/ButtonLink";
 import { Section } from "../common/Section";
-import { siteLinks } from "../../content/siteLinks";
 import { asset } from "../../content/assets";
+import { JoinButton } from "../common/JoinButton";
 
 const storyBlocks = [
   {
@@ -98,9 +98,9 @@ export function CurrentStory({ variant = "full" }: { variant?: "preview" | "full
               From lab tours and technical talks to hackathons, journal clubs, buddy formats, and
               member-led experiments, med-dev is built around people who want to contribute.
             </p>
-            <ButtonLink href={siteLinks.whatsappInvite} target="_blank" rel="noreferrer">
+            <JoinButton>
               Join us <ArrowRight size={18} aria-hidden="true" />
-            </ButtonLink>
+            </JoinButton>
           </div>
         </Section>
       ) : null}

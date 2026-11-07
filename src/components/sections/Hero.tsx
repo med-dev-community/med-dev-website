@@ -2,6 +2,7 @@ import { ArrowRight, MessageCircle } from "lucide-react";
 import { ButtonLink } from "../common/ButtonLink";
 import { siteLinks } from "../../content/siteLinks";
 import { asset, assetSrcSet } from "../../content/assets";
+import { JoinButton } from "../common/JoinButton";
 
 export function Hero() {
   return (
@@ -14,10 +15,10 @@ export function Hero() {
           startups, and healthcare innovation.
         </p>
         <div className="hero__actions">
-          <ButtonLink href={siteLinks.whatsappInvite} target="_blank" rel="noreferrer">
+          <JoinButton>
             <MessageCircle size={19} aria-hidden="true" />
             Join WhatsApp
-          </ButtonLink>
+          </JoinButton>
           <ButtonLink href="/community" variant="secondary">
             How med-dev works
             <ArrowRight size={18} aria-hidden="true" />

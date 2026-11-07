@@ -1,9 +1,8 @@
 import { MessageCircle, Menu, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { ButtonLink } from "../common/ButtonLink";
-import { siteLinks } from "../../content/siteLinks";
 import { asset } from "../../content/assets";
+import { JoinButton } from "../common/JoinButton";
 
 const navItems = [
   { href: "/community", label: "Community" },
@@ -83,15 +82,10 @@ export function Header() {
           </NavLink>
         ))}
       </nav>
-      <ButtonLink
-        href={siteLinks.whatsappInvite}
-        target="_blank"
-        rel="noreferrer"
-        className="header__cta"
-      >
+      <JoinButton className="header__cta">
         <MessageCircle size={18} aria-hidden="true" />
         Join WhatsApp
-      </ButtonLink>
+      </JoinButton>
       <button
         className="header__menu-toggle"
         type="button"

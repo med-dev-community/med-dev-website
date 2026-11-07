@@ -2,6 +2,7 @@ import { Mail, MessageSquare, NotebookPen } from "lucide-react";
 import { ButtonLink } from "../common/ButtonLink";
 import { Section } from "../common/Section";
 import { siteLinks } from "../../content/siteLinks";
+import { JoinButton } from "../common/JoinButton";
 
 export function Contact() {
   return (
@@ -20,15 +21,10 @@ export function Contact() {
           <Mail size={18} aria-hidden="true" />
           Email the team
         </ButtonLink>
-        <ButtonLink
-          href={siteLinks.whatsappInvite}
-          target="_blank"
-          rel="noreferrer"
-          variant="ghost"
-        >
+        <JoinButton variant="ghost">
           <MessageSquare size={18} aria-hidden="true" />
           Join WhatsApp
-        </ButtonLink>
+        </JoinButton>
       </div>
     </Section>
   );

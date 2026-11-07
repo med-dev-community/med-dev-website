@@ -1,6 +1,6 @@
 import { Handshake, MessageCircle } from "lucide-react";
 import { ButtonLink } from "../common/ButtonLink";
-import { siteLinks } from "../../content/siteLinks";
+import { JoinButton } from "../common/JoinButton";
 
 export function MemberPartnerCtas() {
   return (
@@ -14,9 +14,7 @@ export function MemberPartnerCtas() {
             Join the WhatsApp community to hear about events, introductions, internships, and
             member-driven health-tech ideas.
           </p>
-          <ButtonLink href={siteLinks.whatsappInvite} target="_blank" rel="noreferrer">
-            Join us
-          </ButtonLink>
+          <JoinButton>Join us</JoinButton>
         </article>
         <article>
           <Handshake size={28} aria-hidden="true" />

@@ -12,6 +12,16 @@
       content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https:; media-src 'self'; connect-src 'self' https://api.rss2json.com; frame-src https://luma.com; base-uri 'self'; form-action 'self'; object-src 'none'"
     />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <!-- With scripting off the join dialog cannot open, so its trigger would
+         be a button that silently does nothing. Hide it, and the fallback
+         link rendered beside it stands in. -->
+    <noscript
+      ><style>
+        .js-only {
+          display: none !important;
+        }
+      </style></noscript
+    >
     <link rel="icon" href="%BASE_URL%assets/images/favicon.png" />
     <link rel="apple-touch-icon" href="%BASE_URL%assets/images/apple-touch-icon.png" />
     <!--app-head-->

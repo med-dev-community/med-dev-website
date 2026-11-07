@@ -108,6 +108,13 @@ and start from the value the server produced. `CookieNotice` starts hidden and
 - **Asset conversions must be idempotent.** `optimize-assets.sh` is keyed off
   `*-source` files; an earlier version re-encoded its own output on every run and
   lost a quality generation each time.
+- **Team photos carry a baked-in duotone, not a CSS filter.** Dropping a plain
+  colour photo into `team.ts` makes that card stick out. The treatment, measured
+  off `image01`/`image08`/`image10`, which all share it exactly: convert to
+  greyscale, then blend `#02E2B3` over it normally with
+  `alpha = clamp(0.60*y/h - 0.48*x/w, 0, 1)`. Crop square with the head around
+  45% of the frame height and the shoulders still in, then 768x768, then
+  `cwebp -q 80`. `jan-hery.webp` was produced that way.
 - **`fetchPriority` is React 19.** It is silently dropped with a warning on 18.
 
 ## Quality bar
@@ -154,6 +161,32 @@ control; alt text unless decorative; external links verified.
   Dates are formatted *in the script*, not the component: `toLocaleDateString`
   reads the host timezone, so formatting a prerendered date during render would
   be a hydration mismatch for any event near midnight UTC.
+- **The WhatsApp invite never ships as a literal.** `src/content/joinLink.ts`
+  holds it base64-encoded and split across three chunks; `JoinButton` decodes it
+  in the click handler and fills the href of an anchor inside the dialog. The
+  point is that harvesters scanning for `chat.whatsapp.com/<id>` across the HTML
+  and the bundle find nothing, and that search engines have no href to index.
+  It is obfuscation, not security: anyone who clicks the button and opens
+  devtools reads the URL. Three ways to undo it by accident, all pinned by
+  `src/__tests__/joinLink.test.tsx`:
+  - pasting the plain URL into any source file,
+  - calling `inviteUrl()` during render instead of in an event handler, which
+    puts it straight back into the prerendered HTML,
+  - letting a bundler fold the three chunks into one string (esbuild does not,
+    because `join("")` is a runtime call).
+
+  To rotate it after resetting the group link in WhatsApp, re-encode rather than
+  pasting a URL; the command is in the header comment of `joinLink.ts`, and the
+  expected value in the test has to change with it.
+
+  With scripting off, the dialog cannot open, so its trigger would be a button
+  that silently does nothing. A `<noscript><style>` in `index.html` hides every
+  `.js-only` element and a `<noscript>` anchor beside each one points at
+  `siteLinks.notionWelcome` instead. That page is the right fallback precisely
+  because the clients which render `<noscript>` are scrapers and no-JS humans
+  alike: a scraper gets a Notion URL, which is what med-dev.org has always
+  handed out, and a person gets the page holding both the rules and the
+  invite.
 - **rss2json.** Newsletter posts come through the unauthenticated
   `api.rss2json.com`, matching what the previous site did. It is rate limited per
   IP, it is a single point of failure for that section, and visitor IPs reach a

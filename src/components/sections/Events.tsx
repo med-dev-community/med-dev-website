@@ -4,6 +4,7 @@ import { Section } from "../common/Section";
 import { EventCard } from "./EventCard";
 import { pastEvents, upcomingEvents } from "../../content/events";
 import { siteLinks } from "../../content/siteLinks";
+import { JoinButton } from "../common/JoinButton";
 
 /**
  * Upcoming events stay an iframe on purpose: it is the only part of the site
@@ -31,14 +32,7 @@ export function UpcomingEvents() {
         />
       </div>
       <div className="section-actions">
-        <ButtonLink
-          href={siteLinks.whatsappInvite}
-          target="_blank"
-          rel="noreferrer"
-          variant="secondary"
-        >
-          Join WhatsApp for announcements
-        </ButtonLink>
+        <JoinButton variant="secondary">Join WhatsApp for announcements</JoinButton>
         <ButtonLink
           href={siteLinks.lumaCalendar}
           target="_blank"

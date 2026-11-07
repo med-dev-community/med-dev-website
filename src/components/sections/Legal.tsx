@@ -8,7 +8,7 @@ function ImprintContent() {
     <article className="legal-card" id="imprint">
       <dl>
         <div>
-          <dt>Information according to Section 5 TMG</dt>
+          <dt>Information according to Section 5 DDG</dt>
           <dd>
             Leonard Rinser
             <br />
@@ -52,9 +52,15 @@ function PrivacyContent() {
         reachable at <a href={`mailto:${siteLinks.contactEmail}`}>{siteLinks.contactEmail}</a>.
       </p>
       <p>
-        When you visit the site, technically necessary hosting and security data can be processed by
-        the website host so the page can be delivered. This can include request metadata such as IP
-        address, browser information, requested URL, referrer, and timestamps.
+        The site is hosted on GitHub Pages, a service of GitHub, Inc. in the United States. When you
+        visit it, technically necessary hosting and security data can be processed by the host so
+        the page can be delivered. This can include request metadata such as IP address, browser
+        information, requested URL, referrer, and timestamps.
+      </p>
+      <p>
+        The site stores a single entry in your browser's local storage, recording that you have seen
+        the privacy notice so it is not shown again. It contains no identifier, is never sent to a
+        server, and you can clear it with your browser's site data.
       </p>
       <p>We do not use Google Analytics, Google AdSense, or Vercel Web Analytics.</p>
       <p>

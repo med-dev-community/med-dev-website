@@ -21,7 +21,7 @@ export const teamMembers: TeamMember[] = [
   {
     id: "anja-oberender",
     name: "Anja Oberender",
-    role: "Medicine",
+    role: "Science Communication",
     bio: "Anja is a medical journalist at Springer Nature, studied Molecular Biology at LMU, is enthusiastic for science communication and med tech and aims to bring people from both areas together.",
     image: asset("/assets/images/image06.webp"),
     linkedin: "https://www.linkedin.com/in/anja-oberender-4b0356218/",
@@ -57,5 +57,13 @@ export const teamMembers: TeamMember[] = [
     bio: "Philipp is a Software Engineer at Apple and a Research Fellow at Stanford Biodesign, focused on digital health software that integrates connected devices and interoperability standards.",
     image: asset("/assets/images/image09.webp"),
     linkedin: "https://www.linkedin.com/in/pzagar/",
+  },
+  {
+    id: "jan-hery",
+    name: "Jan Hery",
+    role: "Machine Learning Engineering",
+    bio: "Jan is a Data Scientist at TÜV SÜD, working at the intersection of AI and medical device regulation. As tech enthusiast at heart, he is passionate about using data to solve challenges in healthcare.",
+    image: asset("/assets/images/jan-hery.webp"),
+    linkedin: "https://www.linkedin.com/in/jan-hery/",
   },
 ];

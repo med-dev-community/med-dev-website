@@ -4,6 +4,7 @@ import { ButtonLink } from "../common/ButtonLink";
 import { Section } from "../common/Section";
 import { siteLinks } from "../../content/siteLinks";
 import { asset, assetSrcSet } from "../../content/assets";
+import { JoinButton } from "../common/JoinButton";
 
 function ClosedPanel({
   heading,
@@ -31,7 +32,7 @@ function ClosedPanel({
 
 export function InnerCircle() {
   return (
-    <Section id="inner-circle" className="section--content-only">
+    <Section id="inner-circle" className="section--content-only" srTitle="About the Inner Circle">
       <figure className="photo-band reveal">
         <img
           src={asset("/assets/images/inner-circle.webp")}
@@ -59,9 +60,7 @@ export function InnerCircle() {
               Want to be ready for the next round? Join WhatsApp and follow LinkedIn so you see the
               next application window.
             </p>
-            <ButtonLink href={siteLinks.whatsappInvite} target="_blank" rel="noreferrer">
-              Join WhatsApp
-            </ButtonLink>
+            <JoinButton>Join WhatsApp</JoinButton>
             <Clock size={22} aria-hidden="true" />
             <ButtonLink
               href={siteLinks.linkedIn}
@@ -101,9 +100,7 @@ export function InnerCirclePreview() {
         heading="A closer circle inside the community"
         aside={
           <>
-            <ButtonLink href={siteLinks.whatsappInvite} target="_blank" rel="noreferrer">
-              Join WhatsApp
-            </ButtonLink>
+            <JoinButton>Join WhatsApp</JoinButton>
             <ButtonLink href="/inner-circle" variant="secondary">
               Learn about Inner Circle
             </ButtonLink>

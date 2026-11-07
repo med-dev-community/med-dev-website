@@ -4,7 +4,7 @@ import { teamMembers } from "../../content/team";
 
 export function Team() {
   return (
-    <Section id="team" className="section--content-only">
+    <Section id="team" className="section--content-only" srTitle="Organizers and contributors">
       <div className="team-grid">
         {teamMembers.map((member) => (
           <article className="team-member" key={member.id}>

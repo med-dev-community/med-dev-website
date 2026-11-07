@@ -6,6 +6,7 @@ export function Partners() {
   return (
     <section className="partner-section" id="partners" aria-label="Partners">
       <div className="partner-section__inner">
+        <h2 className="sr-only">Partners and collaborations</h2>
         <p className="partner-section__intro">
           med-dev has grown through company visits, research conversations, community partnerships,
           and shared health-tech events.
