@@ -211,6 +211,9 @@ h3 {
 }
 
 .button-link {
+  /* <button> gets cursor: default from the UA stylesheet, <a href> does not.
+     The join triggers are buttons, so without this they lose the hand. */
+  cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
