@@ -5,7 +5,15 @@ import { afterEach, describe, expect, it } from "vitest";
 import { JoinButton } from "../components/common/JoinButton";
 import { inviteUrl } from "../content/joinLink";
 
-const expectedInvite = "https://chat.whatsapp.com/DOGyNrcdSTDAkdlZc6Av3r";
+// Matched rather than compared against the real invite: this file is in a
+// public repo, so pinning the exact URL here would publish the very string the
+// encoding in joinLink.ts exists to keep off the machine-readable web. Written
+// escaped so the pattern itself is not the literal it searches for.
+const invitePattern = /^https:\/\/chat\.whatsapp\.com\/[A-Za-z0-9]{20,28}$/;
+
+// Same reason, built at runtime so the bare domain is not a literal either.
+const inviteHost = ["chat", "whatsapp", "com"].join(".");
+
 const srcDir = join(import.meta.dirname, "..");
 
 function sourceFiles(dir: string): string[] {
@@ -22,16 +30,13 @@ afterEach(cleanup);
 // harvesters scanning for the URL pattern find nothing. Every part of that is
 // easy to undo by accident, so each one is pinned here.
 describe("WhatsApp invite", () => {
-  it("decodes to the real invite", () => {
-    expect(inviteUrl()).toBe(expectedInvite);
+  it("decodes to a well-formed invite", () => {
+    expect(inviteUrl()).toMatch(invitePattern);
   });
 
-  it("appears as a literal nowhere in the source but joinLink.ts", () => {
-    const offenders = sourceFiles(srcDir).filter(
-      (path) =>
-        !path.endsWith(join("content", "joinLink.ts")) &&
-        !path.endsWith(join("__tests__", "joinLink.test.tsx")) &&
-        readFileSync(path, "utf8").includes("chat.whatsapp.com"),
+  it("appears as a literal nowhere in the source", () => {
+    const offenders = sourceFiles(srcDir).filter((path) =>
+      readFileSync(path, "utf8").includes(inviteHost),
     );
 
     expect(offenders).toEqual([]);
@@ -47,6 +52,6 @@ describe("WhatsApp invite", () => {
 
     fireEvent.click(screen.getByRole("button", { name: "Join WhatsApp" }));
 
-    expect(accept()?.getAttribute("href")).toBe(expectedInvite);
+    expect(accept()?.getAttribute("href")).toMatch(invitePattern);
   });
 });
