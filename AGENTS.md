@@ -176,8 +176,11 @@ control; alt text unless decorative; external links verified.
     because `join("")` is a runtime call).
 
   To rotate it after resetting the group link in WhatsApp, re-encode rather than
-  pasting a URL; the command is in the header comment of `joinLink.ts`, and the
-  expected value in the test has to change with it.
+  pasting a URL; the command is in the header comment of `joinLink.ts`. The test
+  needs no change, because it matches a pattern rather than the invite itself:
+  this repo is public, so pinning the exact URL there published the very string
+  the encoding exists to hide. For the same reason the test builds the bare host
+  at runtime and exempts no file, including itself, from the literal check.
 
   With scripting off, the dialog cannot open, so its trigger would be a button
   that silently does nothing. A `<noscript><style>` in `index.html` hides every
