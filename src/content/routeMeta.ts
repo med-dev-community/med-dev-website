@@ -24,6 +24,11 @@ export const siteOrigin = import.meta.env.VITE_SITE_ORIGIN || "https://www.med-d
  */
 export const noindexSite = import.meta.env.VITE_NOINDEX === "true";
 
+// Root-relative on purpose, and the one exception to contract 3: og:image needs
+// an absolute URL, so this goes through absoluteUrl() below, which applies both
+// the origin and BASE_URL. Running it through asset() first would apply the base
+// twice.
+// eslint-disable-next-line no-restricted-syntax
 export const defaultOgImage = "/assets/images/card.jpg";
 
 /** Absolute URL, accounting for both the origin and any subpath base. */
@@ -73,6 +78,8 @@ export const routeMeta = {
     description:
       "A half-year program for med-dev members who want to organize events, build projects, write health-tech content, and connect more deeply with the Munich ecosystem.",
     // JPEG, not the WebP the page itself uses: same reason card.jpg is JPEG.
+    // Root-relative for the same reason as defaultOgImage above.
+    // eslint-disable-next-line no-restricted-syntax
     ogImage: "/assets/images/inner-circle-og.jpg",
   },
   "/partners": {

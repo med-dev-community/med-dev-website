@@ -106,6 +106,22 @@ if [ -f "$VIDEOS/bg.mp4.jpg" ]; then
   rm "$VIDEOS/bg.mp4.jpg"
 fi
 
+# ---------------------------------------------------------------------------
+# Team photos: a manual step, not automated here.
+#
+# The portraits in src/content/team.ts carry a baked-in duotone, not a CSS
+# filter, so dropping in a plain colour photo makes that one card stick out.
+# Measured off image01/image08/image10, which share the treatment exactly:
+#
+#   1. convert to greyscale
+#   2. blend #02E2B3 over it in normal mode, with per-pixel
+#      alpha = clamp(0.60*y/h - 0.48*x/w, 0, 1)
+#   3. crop square, head around 45% of the frame height, shoulders still in
+#   4. resize to 768x768, then cwebp -q 80
+#
+# jan-hery.webp was produced this way.
+# ---------------------------------------------------------------------------
+
 echo "note: conversions are keyed off *-source files and are skipped once done;"
 echo "      drop a new source file in to regenerate a given asset."
 

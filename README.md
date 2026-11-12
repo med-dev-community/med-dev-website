@@ -128,11 +128,13 @@ out of search results, so removing it is what makes the site indexable.
 
 ## Before you change anything
 
-Read `AGENTS.md`. It records the decisions behind the stack, the four contracts
-that will break the build or the live site if ignored, and the bugs already paid
-for once (stretched images, hydration mismatches, a non-idempotent asset script).
-It is written for both human contributors and AI coding assistants, and is worth
-keeping current as the code changes.
+Read `AGENTS.md`. It records the decisions behind the stack and the four
+contracts that will break the build or the live site if ignored. It is written
+for both human contributors and AI coding assistants, and is worth keeping
+current as the code changes.
+
+Narrower gotchas are commented at the line they apply to rather than collected
+in a document, so they are in front of whoever is about to change that line.
 
 Run `npm run format && npm run lint && npm test && npm run build` before
 pushing. The deploy workflow runs the same checks and blocks on failure.

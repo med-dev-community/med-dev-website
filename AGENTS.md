@@ -1,8 +1,12 @@
 # AGENTS.md
 
 Working notes for anyone — human or agent — changing this codebase. `README.md`
-covers setup and day-to-day content edits. This file covers the decisions, the
-contracts you must not break, and the traps that have already cost time.
+covers setup and day-to-day content edits. This file covers the decisions behind
+the stack and the contracts you must not break.
+
+Why a decision was made lives here. Why a *line* is the way it is lives in a
+comment next to that line, not in this file, so it is read by whoever is about
+to change it.
 
 ## What this is
 
@@ -95,27 +99,6 @@ The prerendered HTML is hydrated, so reading `localStorage`, `matchMedia`, dates
 or randomness *during render* is a hydration mismatch. Read them in an effect
 and start from the value the server produced. `CookieNotice` starts hidden and
 `Background` starts on the poster for exactly this reason — both were bugs first.
-
-## Traps already paid for
-
-- **`width`/`height` on `<img>` are presentational hints for *both* dimensions.**
-  CSS that sets only the width leaves the height pinned to the attribute and the
-  image stretches. The global `img { height: auto }` fixes it; do not remove it.
-- **`document.querySelector(hash)` throws** on a hash that is not a valid
-  selector, e.g. `/#2024`. Use `getElementById`.
-- **`localStorage` throws rather than returning null** when site data is
-  blocked. Every access is wrapped.
-- **Asset conversions must be idempotent.** `optimize-assets.sh` is keyed off
-  `*-source` files; an earlier version re-encoded its own output on every run and
-  lost a quality generation each time.
-- **Team photos carry a baked-in duotone, not a CSS filter.** Dropping a plain
-  colour photo into `team.ts` makes that card stick out. The treatment, measured
-  off `image01`/`image08`/`image10`, which all share it exactly: convert to
-  greyscale, then blend `#02E2B3` over it normally with
-  `alpha = clamp(0.60*y/h - 0.48*x/w, 0, 1)`. Crop square with the head around
-  45% of the frame height and the shoulders still in, then 768x768, then
-  `cwebp -q 80`. `jan-hery.webp` was produced that way.
-- **`fetchPriority` is React 19.** It is silently dropped with a warning on 18.
 
 ## Quality bar
 
@@ -216,18 +199,6 @@ control; alt text unless decorative; external links verified.
 - **Scroll-driven reveal.** `.reveal` uses `animation-timeline: view()`, which
   Firefox keeps behind a flag; there it degrades to one fade-up on load.
   Deliberate, not a bug.
-
-## Open product questions
-
-- The partner list is presented as partners, but the intro says med-dev "grew
-  through company visits". A lab tour is not a partnership, the names are
-  unlinked plain text, and `.logo-wall` holds no logos. "Stanford Prezi" also
-  looks like a mangled name.
-- The site still gives already-joined members limited reason to return.
-- Member quotes were planned and never built. Past events now carry some of
-  that weight.
-- The homepage teaser is one deploy behind `/activity` on newly announced
-  events. See the events tradeoff above.
 
 ## Design reference
 
